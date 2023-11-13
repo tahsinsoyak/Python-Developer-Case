@@ -11,7 +11,7 @@ Proje çalıştırılmadan önce aşağıdaki gereksinimleri sağlamalısınız:
 
 1. **Projeyi İndirme:**
     ```bash
-    git clone https://github.com/kullanici_adi/proje-adı.git
+    git clone
     cd proje-adı
     ```
 
