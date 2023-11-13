@@ -27,7 +27,7 @@ def add_products_to_database(product_data):
     session = Session()
 
     for product in product_data:
-        product_id = hash(product['Link'])  # Benzersiz bir ID
+        product_id = abs(hash(product['Link']))  # Benzersiz bir ID
         session.execute(products.insert().values(
             id=str(product_id),
             brand=product['Brand'],

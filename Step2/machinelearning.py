@@ -95,12 +95,3 @@ def get_recommendations_json(product_name):
 
     return recommended_products
 
-
-
-
-# Örnek kullanım:
-product_name = "5'li yüksek bel Koyu Soft 5 renk kadın külot"
-product_name_str = str(product_name)
-
-recommendations = get_recommendations(product_name_str)
-print(recommendations)

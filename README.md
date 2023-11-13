@@ -1,5 +1,53 @@
 # Python-Developer-Case
  
+
+## Gereksinimler
+
+Proje çalıştırılmadan önce aşağıdaki gereksinimleri sağlamalısınız:
+
+- [Anaconda](https://www.anaconda.com/) yüklü olmalı.
+
+## Kurulum
+
+1. **Projeyi İndirme:**
+    ```bash
+    git clone https://github.com/kullanici_adi/proje-adı.git
+    cd proje-adı
+    ```
+
+2. **Anaconda Ortamını Oluşturma ve Etkinleştirme:**
+    ```bash
+    conda env create -f environment.yml
+    conda activate jobcase
+    ```
+
+3. **Veritabanı Oluşturma:**
+    ```bash
+    cd ./Step1/
+    python database.py
+    ```
+
+    Bu adım, tüm verileri veritabanına ekleyecektir.
+
+4. **Veritabanını Kopyalama ve İkinci Adıma Geçme:**
+    ```bash
+    cd ..
+    cd ./Step2/
+    ```
+
+5. **Örnek İncelenen Ürünleri Ekleyerek Veritabanını Oluşturma:**
+    ```bash
+    python db.py
+    ```
+
+6. **Projeyi Başlatma ve Test Etme:**
+    ```bash
+    python test.py
+    ```
+
+    Proje şimdi çalışıyor olmalıdır.
+
+
 Veri Kazıma:
 
 Evet, Trendyol'dan ürün verilerini çıkarmak için Selenium'u kullanarak web kazıması uygulandı. scrape_trendyol fonksiyonu, bir URL alır, sayfaya gidip ürün kartlarından bilgi çıkarır ve ürün detaylarını içeren bir liste döndürür.

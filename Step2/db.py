@@ -15,6 +15,11 @@ def create_viewed_products_table():
         )
     ''')
 
+    cursor.execute('''
+        INSERT INTO viewed_products (product_id)
+        SELECT id FROM products LIMIT 20
+    ''')
+
     # Değişiklikleri kaydet ve bağlantıyı kapat
     conn.commit()
     conn.close()
