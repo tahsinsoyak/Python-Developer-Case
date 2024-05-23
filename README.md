@@ -1,77 +1,94 @@
-# Python-Developer-Case
- 
+# Trendyol Product Scraper and Recommender
 
-## Gereksinimler
+## Project Overview
 
-Proje çalıştırılmadan önce aşağıdaki gereksinimleri sağlamalısınız:
+This project involves creating a web application that scrapes product data from Trendyol, stores it in a SQLite database, and provides a web interface for users to view and interact with the data. The project includes a recommendation system based on TF-IDF and cosine similarity and uses Flask for the web interface.
 
-- [Anaconda](https://www.anaconda.com/) yüklü olmalı.
+## Features
 
-## Kurulum
+1. **Data Scraping**: The project uses Selenium to scrape product data from Trendyol. The `scrape_trendyol` function takes a URL, navigates to the page, extracts product information from product cards, and returns a list of product details.
 
-1. **Projeyi İndirme:**
-    ```bash
-    git clone
-    cd proje-adı
-    ```
+2. **Database Operations (SQLite)**: The project uses SQLite as the database management system. A `products` table with columns `(id, brand, name, price, image, link)` is defined using SQLAlchemy, and the `add_products_to_database` function is used to add products to the database.
 
-2. **Anaconda Ortamını Oluşturma ve Etkinleştirme:**
-    ```bash
-    conda env create -f environment.yml
-    conda activate jobcase
-    ```
+3. **Web Interface (Flask)**: A web application is developed using Flask with several routes:
+   - `index`: Home page displaying products.
+   - `product_detail`: Detailed view of a single product.
+   - `add_to_history`: Adds a viewed product to the user's history.
+   - `history`: Displays previously viewed products.
+   - `get_product_recommendations`: Provides product recommendations based on user interactions.
 
-3. **Veritabanı Oluşturma:**
-    ```bash
-    cd ./Step1/
-    python database.py
-    ```
+4. **Recommendation System**: A content-based recommendation system using TF-IDF (Term Frequency-Inverse Document Frequency) and cosine similarity is implemented in the `machinelearning.py` module. Recommendations are fetched and displayed on the web page based on user interactions.
 
-    Bu adım, tüm verileri veritabanına ekleyecektir.
+5. **API Integration**: An API integration is added using Flask-RESTful. The `GetRecommendationsResource` class provides an endpoint for fetching recommendations in JSON format, allowing interaction with the project via an API.
 
-4. **Veritabanını Kopyalama ve İkinci Adıma Geçme:**
-    ```bash
-    cd ..
-    cd ./Step2/
-    ```
+## Usage
 
-5. **Örnek İncelenen Ürünleri Ekleyerek Veritabanını Oluşturma:**
-    ```bash
-    python db.py
-    ```
+1. Go to the home page (`index`) to view products.
+2. Click on a product to see its detailed information (`product_detail`).
+3. Viewed products will be added to the user's history (`history`).
+4. Get recommendations based on user interactions (`get_product_recommendations`).
 
-6. **Projeyi Başlatma ve Test Etme:**
-    ```bash
-    python test.py
-    ```
+## API Endpoint
 
-    Proje şimdi çalışıyor olmalıdır.
+- **Get Recommendations**: `/api/get_recommendations/<int:product_id>` - Fetch recommendations for the given product ID.
 
 
-Veri Kazıma:
+## Requirements
 
-Evet, Trendyol'dan ürün verilerini çıkarmak için Selenium'u kullanarak web kazıması uygulandı. scrape_trendyol fonksiyonu, bir URL alır, sayfaya gidip ürün kartlarından bilgi çıkarır ve ürün detaylarını içeren bir liste döndürür.
+Before running the project, you need to have the following installed:
 
-Veritabanı İşlemleri (SQLite):
+- Anaconda
 
-SQLite kullanılarak bir veritabanı oluşturuldu ve yönetildi (trendyol_products.db). Ürün bilgilerini depolamak için sütunları (id, marka, isim, fiyat, resim, bağlantı) içeren bir products tablosu tanımlandı. Bu tablo, SQLAlchemy kullanılarak oluşturuldu ve ardından ürünleri veritabanına eklemek için add_products_to_database fonksiyonu kullanıldı.
+## Installation
 
-Web Arayüzü (Flask):
+### Cloning the Project
+```bash
+git clone https://github.com/tahsinsoyak/Python-Developer-Case.git
+cd Python-Developer-Case
+```
 
-Flask kullanılarak bir web uygulaması geliştirildi ve birkaç rota (index, product_detail, add_to_history, history, get_product_recommendations) oluşturuldu. Uygulama, HTML şablonlarını işler ve dinamik olarak veri göstermek için Jinja templating kullanır. Kullanıcılar tarafından görüntülenen ürünleri takip etmek için bir oturum tabanlı mekanizma olan viewed_products_dict bulunmaktadır.
+### Creating and Activating the Anaconda Environment
+```bash
+conda env create -f environment.yml
+conda activate jobcase
+```
 
-Öneri Sistemi:
+### Database Setup
 
-TF-IDF ve kosinüs benzerliği kullanarak içerik tabanlı bir öneri sistemi uygulandı machinelearning.py modülünde. Öneriler, get_product_recommendations rotasında alınır ve web sayfasında gösterilir.
+#### Creating the Database
 
-Flask'ta Veritabanı Etkileşimi:
+Navigate to the Step1 directory and run the database script:
+```bash 
+cd ./Step1/
+python database.py 
+```
+This step will add all data to the database.
 
-get_products_from_database, get_product_by_id ve get_viewed_products_from_database gibi fonksiyonlar, veritabanı ile etkileşimde bulunarak ürün bilgilerini çeker.
+#### Copying the Database and Moving to Step 2 
+```bash 
+cd ..
+cd ./Step2/
+python db.py 
+```
+This step adds example products to the database.
 
-Kullanıcı Etkileşimi:
+### Running and Testing The Project 
 
-Kullanıcılar ana sayfada (index rota) ürünleri görebilir ve ürün detaylarını (product_detail rota) inceleyebilir. Sistem, kullanıcıların gördüğü ürünleri takip eder ve kullanıcılar geçmişlerini görebilir (history rota). Öneriler, kullanıcının gördüğü ürünlere dayanarak ayrı bir sayfada (get_product_recommendations rota) gösterilir.
+```bash 
+python test.py 
+```
 
-API Entegrasyonu:
+The project should now be running.
 
-Projeye, Flask-RESTful kullanılarak bir API entegrasyonu eklenmiştir. Özellikle, öneri almak için GetRecommendationsResource adlı bir sınıf eklenmiştir. Önerileri JSON formatında alacak bir API endpoint oluşturulmuştur. Bu endpoint, get_recommendations_json fonksiyonunu kullanarak önerileri alır ve JSON olarak döndürür. Bu entegrasyon, projeye API ile etkileşim imkanı sağlar.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Support
+
+If you like this app, please give it a star. If you have any questions or suggestions, please open an issue.
+
+## Author
+
+Tahsin Soyak
